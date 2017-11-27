@@ -3,7 +3,7 @@
 ### Assumptions
 I assume that you have looked at solidity before, but by no means an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
 ### What is Truffle?
-Truffle is a must have in a Solidity developers toolkit. Truffle is a a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website].(http://truffleframework.com/)
+Truffle is a must have in a Solidity developers toolkit. Truffle is a a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website](http://truffleframework.com/).
 ### Dependencies
 * [nodejs](https://nodejs.org/en/download/package-manager/) - 
 Installing node on the appropriate platform should install npm (Node Package Manager) as well. That's really all you need!
@@ -87,12 +87,16 @@ Now if you enter
 ```
 EthCalculator
 ```
-Into your REPL, you'll get a long output of JSON data. This means you did everything correctly and your Smart Contract has been deployed! If you want to test it out, then enter the following code into the REPL
+Into your REPL, you'll get a long output of JSON data. This means you did everything correctly and your Smart Contract has been deployed! If you want to test it out, then enter the following code into the REPL (NOTE: The lines with `**OUTPUT**` indicate the output from the REPL and should not be entered when you run the code).
 ```
 var outputPromise
+**OUTPUT**undefined
 var output
+**OUTPUT**undefined
 EthCalculator.deployed().then(function(instance){outputPromise = instance})
+**OUTPUT**undefined
 output = outputPromise.add(10,15)
+**OUTPUT**undefined
 output.then(function(realOutput){console.log(realOutput.toString(10))})
 **OUTPUT**25
 **OUTPUT**undefined
