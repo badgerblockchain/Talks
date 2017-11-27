@@ -1,4 +1,4 @@
-# Introduction to Truffle
+# Introduction to Truffle Talk 11/30/17
 ## Introduction
 ### Assumptions
 I assume that you have looked at solidity before, but by no means an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
