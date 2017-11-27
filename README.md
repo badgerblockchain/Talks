@@ -14,14 +14,16 @@ Truffle/
      .
      .
   subtopic_2/
-     project1
-     project2
+     project1/
      .
      .
      .
 Solidity/
   subtopic/
-     Project1
+     project1/
+     .
+     .
+     .
 ```
 
 |Talk Title|Date Given|Author(s)|Presenter|
