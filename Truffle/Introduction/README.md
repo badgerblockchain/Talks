@@ -3,7 +3,7 @@
 ### Assumptions
 I assume that you have looked at solidity before, but by no means an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
 ### What is Truffle?
-Truffle is a must have in a Solidity developers toolkit. Truffle is a a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website](http://truffleframework.com/)
+Truffle is a must have in a Solidity developers toolkit. Truffle is a a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website].(http://truffleframework.com/)
 ### Dependencies
 * [nodejs](https://nodejs.org/en/download/package-manager/)
 Installing node on the appropriate platform should install npm (Node Package Manager) as well. That's really all you need!
@@ -19,26 +19,26 @@ This should output the location of the executable of the package, which should l
 /usr/bin/node
 /usr/bin/npm
 ```
-After you've installed node and npm, all you need to run is
+After you've installed node and npm, all you need to run is:
 ```
 sudo npm install -g truffle
 sudo npm install -g ethereumjs-testrpc
 ```
-To verify that truffle and testrpc are installed correctly, run
+To verify that truffle and testrpc are installed correctly, run:
 ```
 which truffle
 which testrpc
 ```
-The output should look like this if you installed with sudo
+The output should look like this if you installed with sudo:
 ```
 /usr/bin/truffle
 /usr/bin/testrpc
 ```
-the testrpc package is a node package that will run a small local blockchain on your machine at localhost:8545. This is really helpful for testing and development (instant validation).
+The testrpc package is a node package that will run a small local blockchain on your machine at localhost:8545. This is really helpful for testing and development (instant validation).
 That's it! Truffle and testrpc is now installed.
 ## Let's make the Eth Calculator!
 ### Initialize a Truffle Project
-The first thing you need to do is make a directory, we'll call it `EthCalculator` and `cd` into it. 
+The first thing you need to do is make a directory for your truffle project, we'll call it `EthCalculator` and `cd` into it. 
 ```
 mkdir EthCalculator
 cd $_
@@ -53,6 +53,7 @@ contracts/
 migrations/
 test/
 truffle.js
+truffle-config.js
 ```
 The `contracts/` folder is the directory containing the Solidity files, `migrations/` contains javascript files to automate the deployment process of your smart contracts, and `test/` contains javascript files to test your smart contracts.
 ### The Eth Calculator Smart Contract
