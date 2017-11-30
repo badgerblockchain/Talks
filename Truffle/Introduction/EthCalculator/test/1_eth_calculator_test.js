@@ -6,10 +6,10 @@ contract('EthCalculator', function(accounts) {
             for(var i = 0; i < accounts.length; i++) {
                 return accounts[i];
             }
-        }).then(function(balance) {
+        }).then(function(account) {
             // Uncomment below assertion to show that it will fail properly.
-            // assert.is(web3.fromWei(web3.eth.getBalance(balance), 'ether').toNumber(), 0, "Greater than 0 balance");
-            assert.isAbove(web3.fromWei(web3.eth.getBalance(balance), 'ether').toNumber(), 0, "Greater than 0 balance");
+            // assert.isBelow(web3.fromWei(web3.eth.getBalance(balance), 'ether').toNumber(), 0, "Account " + account + " has a 0 balance");
+            assert.isAbove(web3.fromWei(web3.eth.getBalance(account), 'ether').toNumber(), 0, "Account " + account + " has a 0 balance");
         });
     });
 
