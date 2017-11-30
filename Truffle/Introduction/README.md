@@ -1,7 +1,7 @@
 # Introduction to Truffle Talk 11/30/17
 ## Introduction
 ### Assumptions
-I assume that you have looked at solidity before, but by no means are an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
+I assume that you have looked at solidity before, but by no means are an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial.
 ### What is Truffle?
 Truffle is a must have in a Solidity developers toolkit. Truffle is a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website](http://truffleframework.com/).
 ### Dependencies
@@ -19,6 +19,7 @@ This should output the location of the executable of the package, which should l
 /usr/bin/node
 /usr/bin/npm
 ```
+**The install location of node packages may be different on your platform. IE for OSX, node installs to `/usr/local/bin/`, not `/usr/bin/`.**
 After you've installed node and npm, all you need to run is:
 ```
 sudo npm install -g truffle
