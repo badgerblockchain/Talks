@@ -1,4 +1,4 @@
-var EthCalcMigration = artificats.require('EthCalculator');
+var EthCalcMigration = artifacts.require('EthCalculator');
 
 // TODO: Create a network param to deploy to certain networks. 
 module.exports = function(deployer) {
