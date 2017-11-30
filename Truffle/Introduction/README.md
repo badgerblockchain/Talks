@@ -110,3 +110,110 @@ output.then(function(realOutput){console.log(realOutput.toString(10))})
 **OUTPUT**25
 **OUTPUT**undefined
 ```
+### Let's write real test scripts
+Truffle built its testing framework on something called [Mocha](https://mochajs.org/). 
+Mocha is a testing framework for javascript.
+
+First things first, we need to make a testing script inside of the `test/` folder. Every
+file in the `test/` folder will execute when we call `truffle test`. I followed the naming convention provided in the sample Truffle box.
+
+The first line in your test script should be importing your smart contract.
+```
+// var <name of contract> = artifacts.require('<name of contract>');
+var EthCalculator = artifacts.require('EthCalculator');
+```
+It's very important that you do not include the `.sol` extension in the name of the contract in 
+the require statement. This is because Solidity files can contain several contracts, so we need
+to specify which one we want imported.
+
+You can have as many smart contracts as you want in one testing file. All you need to do is have
+multiple require statements with a new variable for each smart contract.
+
+Next we will write our actual test.
+```
+// We will be adding more tests to this so the contract does not have a closing '}'.
+contract('EthCalculator', function(accounts) {
+    it("Verify that all of the accounts have more than 0 eth in them.", function() {
+        return EthCalculator.deployed().then(function(instance) {
+            for(var i = 0; i < accounts.length; i++) {
+                return accounts[i];
+            }
+        }).then(function(account) {
+            // Uncomment below assertion to show that it will fail properly.
+            // assert.isBelow(web3.fromWei(web3.eth.getBalance(balance), 'ether').toNumber(), 0, "Account " + account + " has a non 0 balance");
+            assert.isAbove(web3.fromWei(web3.eth.getBalance(account), 'ether').toNumber(), 0, "Account " + account + " has a 0 balance");
+        });
+    });
+```
+#### contract
+For each contract that you'd like to test, you need to add another `contract` call.
+```
+contract('<name of smart contract', function(<arguments being passed to it>) { ...
+ ...
+});
+```
+#### it
+`it` is a test. The first argument to `it` is a description of what the test is. The second arguement is a chain of javascript promises.
+#### assert
+The `assert` module is the bread and butter of writing your tests. There are hundreds of static functions you can run on 
+the `assert` module (`is() isAbove() isBelow() ....`). The complete list is [here](http://chaijs.com/api/assert/)
+
+The `assert` call is what actually checks that your output is valid.
+```
+assert.<your function operator>(<insert code here to get a value>, <what the value should be>, "Error message if the assert fails");
+```
+That's all there is to it. Here's the rest of the test file that I wrote as an example. Please copy and paste the following code into your test script. 
+```
+
+    it("Should add 5 + 3 correctly.", function() {
+        return EthCalculator.deployed().then(function(instance) {
+            instance.add(5, 3).then(function(output) {
+                assert.equal(output.toNumber(), 8, "The output of 5 + 3 should be 8, but" +
+                " your code output: " + output.toNumber());
+            });
+        });
+    });
+    
+    it("Should multiply 5 * 3 correctly.", function() {
+        return EthCalculator.deployed().then(function(instance) {
+            instance.multiply(5, 5).then(function(output) {
+                assert.equal(output.toNumber(), 25, "The output of 5 * 3 should equal 15, but" +
+                    " the code output " + output.toNumber());
+            });
+        });
+    });
+
+    it("Should mod 5 % 3 correctly.", function() {
+        return EthCalculator.deployed().then(function(instance) {
+            instance.mod(5, 3).then(function(output) {
+                assert.equal(output.toNumber(), 2, "The output of 5 % 3 should be 2, but your code "
+                + " output: " + output.toNumber());
+            });
+        });
+    });
+
+    // If you decide to implement subtraction and division, uncomment these tests and see 
+    // if your code passes!
+    // it("Should subtract 5 - 3 correctly.", function() {
+    //     return EthCalculator.deployed().then(function(instance) {
+    //         instance.subtract(5, 3).then(function(output) {
+    //             assert.equal(output.toNumber(), 2, "The output of 5 - 3 should be 2, but your code "
+    //             + " output: " + output.toNumber());
+    //         });
+    //     });
+    // });
+
+    // it("Should divide 5 / 3 correctly.", function() {
+    //     return EthCalculator.deployed().then(function(instance) {
+    //         instance.divide(5, 3).then(function(output) {
+    //             assert.equal(output.toNumber(), 1, "The output of 5 / 3 should be 1, but your code "
+    //             + " output: " + output.toNumber());
+    //         });
+    //     });
+    // });
+});
+```
+### Run your test
+Now let's run your tests! To do so, run the command `truffle test` from command line, or `test` if you're in the `truffle develop` REPL. You will either see several check marks saying that your automated tests passed, or you will receive the error messages that you wrote. 
+
+For now, this is where I'll end this tutorial. I plan on adding more to this tutorial - ie full dapp development, deploying to ropsten or the mainnet, etc. etc. If there's anything you'd like to see in this tutorial, please fill out an issue tag with the details!
