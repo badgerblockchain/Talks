@@ -1,13 +1,13 @@
 # Introduction to Truffle Talk 11/30/17
 ## Introduction
 ### Assumptions
-I assume that you have looked at solidity before, but by no means an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
+I assume that you have looked at solidity before, but by no means are an expert. I also assume that you are comfortable with the CLI on your machine. For this talk, I'll be working on Ubuntu 16.04 Xenial. 
 ### What is Truffle?
-Truffle is a must have in a Solidity developers toolkit. Truffle is a a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website](http://truffleframework.com/).
+Truffle is a must have in a Solidity developers toolkit. Truffle is a framework that enables developers to develop, test, and deploy smart contracts quickly and reliably. If you'd like to read more about it, [here's their website](http://truffleframework.com/).
 ### Dependencies
 * [nodejs](https://nodejs.org/en/download/package-manager/) - 
-Installing node on the appropriate platform should install npm (Node Package Manager) as well. That's really all you need!
-* [testrpc](https://www.npmjs.com/package/ethereumjs-testrpc) - The testrpc package is a node package that will run a small local blockchain on your machine at localhost:8545 (default port is 8545, but you can modify it with the `-p <new port number>` flag. This is really helpful for testing and development (instant validation).
+Follow the platform specific instructions for your machine on nodejs's site. When you install node, you'll also install npm (Node Package Manager).
+* [testrpc](https://www.npmjs.com/package/ethereumjs-testrpc) - The testrpc package is a node package that will run a small local blockchain on your machine at localhost:8545 (default port is 8545, but you can modify it with the `-p <new port number>` flag. Running a local blockchain on your machine allows you to instantly validate transactions, so you can rapidly test your smart contract.
 ### Installing Truffle
 To verify that you've installed node and npm, run 
 ```
@@ -34,10 +34,10 @@ The output should look like this if you installed with sudo:
 /usr/bin/truffle
 /usr/bin/testrpc
 ```
-That's it! Truffle and testrpc is now installed.
+That's it! Truffle and testrpc are now installed.
 ## Let's make the Eth Calculator!
 ### Initialize a Truffle Project
-The first thing you need to do is make a directory for your truffle project, we'll call it `EthCalculator` and `cd` into it. 
+The first thing you need to do is make a directory for your truffle project, we'll call it `EthCalculator`. Now let's `cd` into `EthCalculator`. 
 ```
 mkdir EthCalculator
 cd $_
@@ -54,10 +54,19 @@ test/
 truffle.js
 truffle-config.js
 ```
-The `contracts/` folder is the directory containing the Solidity files, `migrations/` contains javascript files to automate the deployment process of your smart contracts, and `test/` contains javascript files to test your smart contracts. You may be asking yourself "what's the difference between `truffle.js` and `truffle-config.js`. The answer is they're the same - kinda. Both files are config files for truffle. If you're on a UNIX system, you can delete `truffle-config.js`. If you're on Windows and using command prompt, `truffle.js` will cause a naming conflict with the executable command `truffle`. There are a few remedies for this, one of which is to delete `truffle.js` and use `truffle-config.js`. The other remedies are documented [here](http://truffleframework.com/docs/advanced/configuration#resolving-naming-conflicts-on-windows).
+#### What are these folders?
+The `contracts/` folder is the directory containing the Solidity files, `migrations/` contains javascript files to automate the deployment process of your smart contracts, and `test/` contains javascript files to test your smart contracts.
+#### What are these javascript files?
+You may be asking yourself "what's the difference between `truffle.js` and `truffle-config.js`. The answer is they're the same - kinda. Both files are config files for truffle. If you're on a UNIX system, you can delete `truffle-config.js`. If you're on Windows and using command prompt, `truffle.js` will cause a naming conflict with the executable command `truffle`.
+##### How do I fix Windows naming conflicts? 
+There are a few remedies actually. One way is to delete `truffle.js` and use `truffle-config.js`. The other remedies are documented [here](http://truffleframework.com/docs/advanced/configuration#resolving-naming-conflicts-on-windows).
 ### The Eth Calculator Smart Contract
-We're going to write a five functioned basic calculator. I won't spend any time talking about Solidity - we'll save that for another day. The Solidity file is available [here](EthCalculator/contracts/EthCalculator.sol). I'd like for you to implement the `subtract` and `divide` functions. If you're feeling really fancy, then you can add a state variable to your calculator. I'd recommend using a mapping from strings to ints, and then having a setter that checks if the command has been called before, if so return it, else do the command and insert it into the mapping and return the value to msg.sender. 
-
+#### What are we going to do?
+We're going to write a five functioned basic calculator. I won't spend any time talking about Solidity - we'll save that for another day. The Solidity file is available [here](EthCalculator/contracts/EthCalculator.sol). 
+#### What do I want you to do?
+I'd like for you to implement the `subtract` and `divide` functions. 
+#### Bonus challenge
+If you're feeling really fancy, then you can add a state variable to your calculator. I'd recommend using a mapping from strings to ints, and then having a setter that checks if the command has been called before, if so return it, else do the command and insert it into the mapping and return the value to msg.sender. 
 
 Now that you've written your smart contract, let's switch your cli to develop mode. To compile your smart contract, run
 ```
@@ -65,16 +74,16 @@ truffle develop
 compile
 ```
 Now that you're in develop mode, you no longer need to preface your truffle commands with `truffle`. You've created your own javascript REPL (Read Evaluate Print Loop) with truffle commands and web3 (more on this later) built in.
-The compiler will throw some errors and warnings. You should do your best to fix them. The output should be
+The compiler could throw some errors and warnings. You should do your best to fix them. The output should be
 ```
 Compiling ./contracts/EthCalculator.sol...
 Writing artifacts to ./build/contracts
 ```
-After you've compilled your smart contracts, we can deploy them by opening your console that's running the develop REPL and calling
+After you've compilled your smart contracts, we can deploy them by entering the `migrate` command.
 ```
  migrate
 ```
-This should output something like
+This should output something like the following.
 ```
 Using network develop
 
