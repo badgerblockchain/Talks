@@ -80,10 +80,46 @@ The compiler could throw some errors and warnings. You should do your best to fi
 Compiling ./contracts/EthCalculator.sol...
 Writing artifacts to ./build/contracts
 ```
-After you've compilled your smart contracts, we can deploy them by entering the `migrate` command.
+
+### Creating Migration scripts
+Now it's time to add a migration script to your project. All of the scripts in the migration folder will execute when you call `migrate`. The firs thing that we need to do is specify a network in the `truffle.js` or `truffle-config.js`. If you're not using `truffle-config.js`, then you can safely delete that file. 
+The content of `truffle.js` is below.
 ```
- migrate
+module.exports = {
+ networks: {
+  development: {
+   host: "localhost",
+   port: 9545,
+   network_id: "*"
+  }
+ }
+};
 ```
+The `networks` section contains all of the deployable networks that you specify. The `development` JSON object is a single network that I've specified. Because there is only one network, `development` will be called by default. If you create multiple networks, you can deploy to a specific one by calling `truffle migrate <network name: development>`. We still haven't written the migration file though, so don't call `truffle migrate` now.
+
+Now let's write the migration file. Let's create a file called `1_eth_calculator_migration.js` in the `migrations/` folder.
+The first line of our migration file should be 
+```
+var EthCalcMigration = artifacts.require('EthCalculator');
+```
+This loads a reference to the smart contract so that truffle can deploy it. The rest of the code is relatively simple.
+```
+module.exports = function(deployer) {
+ deployer.deploy(EthCalcMigration);
+}
+```
+That's it! If your `truffle develop` REPL is still running, run
+
+```
+migrate
+```
+If your REPL isn't running, then run the following commands
+```
+truffle develop
+compile
+migrate
+```
+
 This should output something like the following.
 ```
 Using network develop
