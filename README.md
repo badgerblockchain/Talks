@@ -5,6 +5,7 @@ If you'd like to give a talk, please enter your slides / code into the correct s
 |----------|----------|-----------------|---------|
 |[Introduction to Truffle](https://github.com/badgerblockchain/Talks/tree/master/Fall17/Truffle)| 11/30/17 | Evan Kivolowitz| Evan Kivolowitz|
 |[Introduction to Ethereum](https://github.com/badgerblockchain/Talks/blob/master/Spring18/IntroToEthereum.pptx)|2/1/18 | Evan Kivolowitz, Hayden Pilsner | Evan Kivolowitz|
+|[Getting Started With Truffle](https://github.com/badgerblockchain/Talks/blob/master/Spring18/Truffle.pptx)|2/16/18 | Evan Kivolowitz, Hayden Pilsner | Hayden Pilsner|
 
 ## Contributors
 * [Evan Kivolowitz](https://github.com/ekivolowitz)
